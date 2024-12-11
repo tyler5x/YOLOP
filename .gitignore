@@ -10,3 +10,7 @@ inference/
 *.pt
 *.tar
 *.tar.gz
+*.png
+*.json
+*.jpg
+*.txt
