@@ -3,3 +3,8 @@ This repo is a fork of the original YOLOP project created for the final project 
 Our changes to the original repo lie in the files: helpers.ipynb, Convert_CULane_Data.py, and lib/config/default.py. 
 
 In order to reproduce the results of this repo, it will require downloading parts of all of the Cityscapes, CULane, and Curvelanes datasets and running the data pre-processing functions in helpers.ipynb and Convert_CULane_Data.py. The file helpers.ipynb contains functions to process the Cityscapes dataset for driviable area segmentation inference and the CurveLanes dataset for lane line segmentation. Convert_CULane_Data.py contains functions to prepare the CULane dataset for lane line segmentation. Once the data has been processed, it needs to be placed in the same file structure as the original BDD dataset with a folder for each set of images or labels, which is referenced in lib/config/default.py.
+
+You can find the datasets we used here: 
+Cityscapes: https://www.cityscapes-dataset.com/
+CurveLanes: https://github.com/SoulmateB/CurveLanes
+CULane: https://xingangpan.github.io/projects/CULane.html
