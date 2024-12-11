@@ -97,6 +97,7 @@ class AutoDriveDataset(Dataset):
         """
         data = self.db[idx]
         img = cv2.imread(data["image"], cv2.IMREAD_COLOR | cv2.IMREAD_IGNORE_ORIENTATION)
+        # print("img",img)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         # seg_label = cv2.imread(data["mask"], 0)
         if self.cfg.num_seg_class == 3:

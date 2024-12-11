@@ -15,6 +15,8 @@ import numpy as np
 from lib.utils import DataLoaderX
 from tensorboardX import SummaryWriter
 
+import io
+
 import lib.dataset as dataset
 from lib.config import cfg
 from lib.config import update_config
@@ -36,7 +38,8 @@ def parse_args():
                         help='log directory',
                         type=str,
                         default='runs/')
-    parser.add_argument('--weights', nargs='+', type=str, default='/data2/zwt/wd/YOLOP/runs/BddDataset/detect_and_segbranch_whole/epoch-169.pth', help='model.pth path(s)')
+    # parser.add_argument('--weights', nargs='+', type=str, default='/data2/zwt/wd/YOLOP/runs/BddDataset/detect_and_segbranch_whole/epoch-169.pth', help='model.pth path(s)')
+    parser.add_argument('--weights', nargs='+', type=str, default='weights/End-to-end.pth', help='model.pth path(s)')
     parser.add_argument('--conf_thres', type=float, default=0.001, help='object confidence threshold')
     parser.add_argument('--iou_thres', type=float, default=0.6, help='IOU threshold for NMS')
     args = parser.parse_args()
@@ -81,8 +84,12 @@ def main():
 
     # det_idx_range = [str(i) for i in range(0,25)]
     model_dict = model.state_dict()
-    checkpoint_file = args.weights
+    # breakpoint()
+    checkpoint_file = args.weights # actually contains weights 
     logger.info("=> loading checkpoint '{}'".format(checkpoint_file))
+    # checkpoint = torch.load(checkpoint_file)
+    # with open(checkpoint_file, 'rb') as f: 
+    #     buffer = io.BytesIO(f)
     checkpoint = torch.load(checkpoint_file)
     checkpoint_dict = checkpoint['state_dict']
     # checkpoint_dict = {k: v for k, v in checkpoint['state_dict'].items() if k.split(".")[1] in det_idx_range}
@@ -152,3 +159,5 @@ def main():
 if __name__ == '__main__':
     main()
     
+# salloc --cpus-per-task=4 --gpus=1 --mem-per-gpu=44GB --partition=spgpu --time=0-02:00:00 --account=na565s001f24_class
+# python tools/test.py --weights weights/End-to-end.pth
